@@ -1,0 +1,70 @@
+### Test 1: Request without token (should return 401 Unauthorized)
+GET http://localhost:5077/blogs
+
+### Test 2: Request with invalid token format (should return 401 Unauthorized)
+GET http://localhost:5077/blogs
+Authorization: InvalidToken
+
+### Test 3: Get all blogs with valid token
+GET http://localhost:5077/blogs
+Authorization: Bearer valid-secret-token-12345
+
+### Test 4: Get blog by ID with valid token
+GET http://localhost:5077/blogs/0
+Authorization: Bearer valid-secret-token-12345
+
+### Test 5: Get blog by ID (not found) with valid token
+GET http://localhost:5077/blogs/10
+Authorization: Bearer valid-secret-token-12345
+
+### Test 6: Create a new blog with valid token
+POST http://localhost:5077/blogs
+Content-Type: application/json
+Authorization: Bearer valid-secret-token-12345
+
+{
+  "title": "Third Blog Post",
+  "body": "This is the content of the third blog post"
+}
+
+### Test 7: Create another blog with valid token
+POST http://localhost:5077/blogs
+Content-Type: application/json
+Authorization: Bearer valid-secret-token-12345
+
+{
+  "title": "Fourth Blog Post",
+  "body": "More blog content here"
+}
+
+### Test 8: Update blog by ID (valid) with valid token
+PUT http://localhost:5077/blogs/0
+Content-Type: application/json
+Authorization: Bearer valid-secret-token-12345
+
+{
+  "title": "First Blog - Updated",
+  "body": "Updated content for the first blog"
+}
+
+### Test 9: Update blog by ID (not found) with valid token
+PUT http://localhost:5077/blogs/99
+Content-Type: application/json
+Authorization: Bearer valid-secret-token-12345
+
+{
+  "title": "Non-existent Blog",
+  "body": "This blog does not exist"
+}
+
+### Test 10: Delete blog by ID (valid) with valid token
+DELETE http://localhost:5077/blogs/1
+Authorization: Bearer valid-secret-token-12345
+
+### Test 11: Delete blog by ID (not found) with valid token
+DELETE http://localhost:5077/blogs/50
+Authorization: Bearer valid-secret-token-12345
+
+### Test 12: Get all blogs after modifications with valid token
+GET http://localhost:5077/blogs
+Authorization: Bearer valid-secret-token-12345
